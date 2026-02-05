@@ -1,115 +1,23 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مولد المواقع الخرافي</title>
+    <title>${type}</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Tajawal', sans-serif; background-color: #0a0a0a; color: white; transition: all 0.5s ease; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .hidden-section { display: none; }
-        .gradient-text { background: linear-gradient(90deg, #3b82f6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    </style>
-</head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4">
-
-    <div id="hero-section" class="text-center">
-        <h1 class="text-6xl font-black mb-6 gradient-text">الموقع الخرافي</h1>
-        <p class="text-gray-400 mb-8 text-xl">تخضع الروس لعتابه الابه.. ابدأ بصناعة موقعك الآن</p>
-        <button onclick="startWizard()" class="bg-white text-black px-12 py-4 rounded-full font-bold text-xl hover:scale-105 transition transform">انطلق الآن</button>
-    </div>
-
-    <div id="wizard-section" class="hidden-section w-full max-w-lg glass p-8 rounded-3xl">
-        <h2 class="text-2xl font-bold mb-6 border-b border-white/10 pb-4">جهز موقعك:</h2>
-        
-        <div class="space-y-6">
-            <div>
-                <label class="block mb-2">نوع الموقع:</label>
-                <input id="site-type" type="text" placeholder="مثلاً: متجر، مدونة، شخصي" class="w-full bg-white/5 border border-white/10 p-3 rounded-xl focus:outline-none focus:border-blue-500">
-            </div>
-
-            <div>
-                <label class="block mb-2">حقوقك (الاسم اللي يظهر تحت):</label>
-                <input id="site-rights" type="text" placeholder="مثلاً: جميع الحقوق محفوظة لـ..." class="w-full bg-white/5 border border-white/10 p-3 rounded-xl focus:outline-none focus:border-blue-500">
-            </div>
-
-            <div>
-                <label class="block mb-2">شكل الموقع:</label>
-                <select id="site-style" class="w-full bg-white/5 border border-white/10 p-3 rounded-xl focus:outline-none text-black md:text-white">
-                    <option value="dark" class="text-black">دارك مود (أسود ورمادي)</option>
-                    <option value="white-blue" class="text-black">أبيض مع كحلي</option>
-                    <option value="full-black" class="text-black">أسود كامل</option>
-                    <option value="black-white" class="text-black">أسود مع أبيض</option>
-                </select>
-            </div>
-
-            <button onclick="generateCode()" class="w-full bg-blue-600 py-4 rounded-xl font-bold hover:bg-blue-700 transition">توليد الكود الخرافي 🚀</button>
-        </div>
-    </div>
-
-    <div id="result-section" class="hidden-section w-full max-w-4xl glass p-8 rounded-3xl">
-        <h2 class="text-2xl font-bold mb-4 text-green-400">مبروك! كود موقعك جاهز:</h2>
-        <textarea id="code-output" class="w-full h-96 bg-black/50 text-green-500 font-mono p-4 rounded-xl border border-white/10 mb-4" readonly></textarea>
-        <div class="flex gap-4">
-            <button onclick="copyCode()" class="flex-1 bg-white text-black py-3 rounded-xl font-bold">نسخ الكود</button>
-            <button onclick="location.reload()" class="flex-1 border border-white/20 py-3 rounded-xl">إعادة البدء</button>
-        </div>
-    </div>
-
-    <script>
-        function startWizard() {
-            document.getElementById('hero-section').classList.add('hidden-section');
-            document.getElementById('wizard-section').classList.remove('hidden-section');
-        }
-
-        function generateCode() {
-            const type = document.getElementById('site-type').value || "موقعي الخرافي";
-            const rights = document.getElementById('site-rights').value || "جميع الحقوق محفوظة";
-            const style = document.getElementById('site-style').value;
-
-            let colors = "";
-            if(style === 'dark') colors = "bg-zinc-900 text-white";
-            else if(style === 'white-blue') colors = "bg-white text-slate-900 border-t-8 border-blue-900";
-            else if(style === 'full-black') colors = "bg-black text-zinc-400";
-            else if(style === 'black-white') colors = "bg-black text-white";
-
-            const generatedHtml = `
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <title>\${type}</title>
-    <script src="https://cdn.tailwindcss.com"><\/script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal&display=swap" rel="stylesheet">
 </head>
-<body class="\${colors}" style="font-family: 'Tajawal', sans-serif;">
+<body class="${colors}" style="font-family: 'Tajawal', sans-serif;">
     <nav class="p-6 flex justify-between border-b border-white/10">
-        <div class="text-xl font-bold">\${type}</div>
+        <div class="text-xl font-bold">${type}</div>
         <div>تخضع الروس لعتابه الابه</div>
     </nav>
     <main class="h-screen flex flex-col items-center justify-center">
         <h1 class="text-5xl font-black mb-4">أهلاً بك في عالمنا</h1>
-        <p class="text-xl opacity-70">موقع \${type} المصمم خصيصاً لك</p>
+        <p class="text-xl opacity-70">موقع ${type} المصمم خصيصاً لك</p>
     </main>
     <footer class="p-6 text-center border-t border-white/10">
-        \${rights} © 2026
+        ${rights} © 2026
     </footer>
-</body>
-</html>`;
-
-            document.getElementById('code-output').value = generatedHtml;
-            document.getElementById('wizard-section').classList.add('hidden-section');
-            document.getElementById('result-section').classList.remove('hidden-section');
-        }
-
-        function copyCode() {
-            const copyText = document.getElementById("code-output");
-            copyText.select();
-            document.execCommand("copy");
-            alert("تم نسخ الكود بنجاح!");
-        }
-    </script>
 </body>
 </html>
