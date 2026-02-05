@@ -1,23 +1,161 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>${type}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صانع المواقع الاحترافي</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Tajawal', sans-serif; background-color: #050505; color: white; }
+        .glass-morphism { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .code-box { font-family: 'Courier New', monospace; scrollbar-width: thin; scrollbar-color: #3b82f6 #111; }
+    </style>
 </head>
-<body class="${colors}" style="font-family: 'Tajawal', sans-serif;">
-    <nav class="p-6 flex justify-between border-b border-white/10">
-        <div class="text-xl font-bold">${type}</div>
-        <div>تخضع الروس لعتابه الابه</div>
-    </nav>
-    <main class="h-screen flex flex-col items-center justify-center">
-        <h1 class="text-5xl font-black mb-4">أهلاً بك في عالمنا</h1>
-        <p class="text-xl opacity-70">موقع ${type} المصمم خصيصاً لك</p>
-    </main>
-    <footer class="p-6 text-center border-t border-white/10">
-        ${rights} © 2026
+<body class="min-h-screen">
+
+    <div id="setup-screen" class="max-w-2xl mx-auto mt-20 p-8 glass-morphism rounded-3xl shadow-2xl">
+        <h1 class="text-4xl font-black mb-2 text-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">صانع الكود الخرافي</h1>
+        <p class="text-gray-400 text-center mb-10">تخضع الروس لعتابه الابه.. املأ البيانات ليتم توليد مشروع كامل</p>
+        
+        <div class="space-y-6">
+            <div>
+                <label class="block text-sm font-bold mb-2 text-blue-300">اسم أو نوع الموقع</label>
+                <input id="in-type" type="text" placeholder="مثلاً: منصة إبداع" class="w-full bg-white/5 p-4 rounded-xl border border-white/10 outline-none focus:border-blue-500 transition">
+            </div>
+            <div>
+                <label class="block text-sm font-bold mb-2 text-blue-300">صاحب الحقوق</label>
+                <input id="in-rights" type="text" placeholder="مثلاً: شركة الفلان المحدودة" class="w-full bg-white/5 p-4 rounded-xl border border-white/10 outline-none focus:border-blue-500 transition">
+            </div>
+            <div>
+                <label class="block text-sm font-bold mb-2 text-blue-300">النمط البصري</label>
+                <select id="in-style" class="w-full bg-white/5 p-4 rounded-xl border border-white/10 outline-none text-black">
+                    <option value="dark">Dark Mode (فخامة عصرية)</option>
+                    <option value="navy">White & Navy (رسمي وأنيق)</option>
+                    <option value="pure-black">Deep Black (أسود ملكي)</option>
+                    <option value="classic">B&W (أبيض وأسود كلاسيك)</option>
+                </select>
+            </div>
+            <button onclick="buildEverything()" class="w-full bg-gradient-to-r from-blue-600 to-blue-400 py-4 rounded-xl font-black text-xl hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] transition">توليد المشروع الكامل ⚡</button>
+        </div>
+    </div>
+
+    <div id="result-screen" class="hidden max-w-5xl mx-auto mt-10 p-6">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-bold">ملف الـ HTML الجاهز:</h2>
+            <button onclick="copyCode()" class="bg-green-600 px-6 py-2 rounded-lg font-bold hover:bg-green-700">نسخ الكود بالكامل</button>
+        </div>
+        <textarea id="output" class="w-full h-[600px] bg-black border border-blue-900/30 p-6 rounded-2xl text-blue-400 code-box text-sm shadow-2xl" spellcheck="false"></textarea>
+        <button onclick="location.reload()" class="mt-4 text-gray-500 hover:text-white transition underline">تعديل الخيارات ←</button>
+    </div>
+
+    <script>
+        function buildEverything() {
+            const name = document.getElementById('in-type').value || "مشروعي";
+            const rights = document.getElementById('in-rights').value || "جميع الحقوق محفوظة";
+            const style = document.getElementById('in-style').value;
+
+            let theme = "";
+            if(style === 'dark') theme = "bg-[#0f172a] text-slate-200";
+            else if(style === 'navy') theme = "bg-white text-[#1e3a8a]";
+            else if(style === 'pure-black') theme = "bg-black text-gray-300";
+            else if(style === 'classic') theme = "bg-black text-white border-white";
+
+            const fullCode = `<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>\${name} | الموقع الخرافي</title>
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Tajawal', sans-serif; scroll-behavior: smooth; }
+        .hero-grad { background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(147,51,234,0.1) 100%); }
+    </style>
+</head>
+<body class="\${theme} overflow-x-hidden">
+
+    <header class="fixed w-full z-50 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-black tracking-tighter uppercase">\${name}</div>
+            <nav class="hidden md:flex gap-8 font-medium">
+                <a href="#home" class="hover:text-blue-400 transition">الرئيسية</a>
+                <a href="#features" class="hover:text-blue-400 transition">المميزات</a>
+                <a href="#about" class="hover:text-blue-400 transition">من نحن</a>
+            </nav>
+            <button class="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold">اتصل بنا</button>
+        </div>
+    </header>
+
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 hero-grad">
+        <div class="max-w-4xl text-center px-6">
+            <span class="px-4 py-1 rounded-full border border-blue-500/30 text-blue-400 text-sm font-bold mb-6 inline-block">تخضع الروس لعتابه الابه</span>
+            <h1 class="text-5xl md:text-7xl font-black mb-8 leading-[1.1]">مستقبل المواقع <br><span class="text-blue-500">يبدأ من هنا</span></h1>
+            <p class="text-lg opacity-70 mb-10 max-w-2xl mx-auto italic">مرحباً بك في \${name}. نحن هنا لنصنع لك تجربة رقمية تفوق التوقعات وتجعل رؤيتك حقيقة ملموسة.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#features" class="bg-blue-600 px-8 py-4 rounded-xl font-bold shadow-lg shadow-blue-900/20 hover:-translate-y-1 transition">اكتشف المزيد</a>
+                <button class="border border-white/20 px-8 py-4 rounded-xl font-bold hover:bg-white/5 transition">عرض الأعمال</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl font-black mb-4">لماذا تختارنا؟</h2>
+                <div class="h-1 w-20 bg-blue-600 mx-auto"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="p-10 rounded-3xl border border-white/10 hover:border-blue-500/50 transition">
+                    <div class="text-4xl mb-6">⚡</div>
+                    <h3 class="text-2xl font-bold mb-4">أداء صاروخي</h3>
+                    <p class="opacity-60 leading-relaxed">نستخدم أحدث تقنيات الويب لضمان سرعة تحميل لا تتجاوز الأجزاء من الثانية.</p>
+                </div>
+                <div class="p-10 rounded-3xl border border-white/10 hover:border-blue-500/50 transition bg-white/5">
+                    <div class="text-4xl mb-6">🎨</div>
+                    <h3 class="text-2xl font-bold mb-4">تصميم إبداعي</h3>
+                    <p class="opacity-60 leading-relaxed">كل بكسل في \${name} مدروس بعناية ليعكس هوية مشروعك بأفضل صورة.</p>
+                </div>
+                <div class="p-10 rounded-3xl border border-white/10 hover:border-blue-500/50 transition">
+                    <div class="text-4xl mb-6">🔒</div>
+                    <h3 class="text-2xl font-bold mb-4">أمان مطلق</h3>
+                    <p class="opacity-60 leading-relaxed">حماية بياناتك هي أولويتنا القصوى، نطبق معايير أمان عالمية.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 border-t border-white/10 bg-black/20">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10">
+            <div>
+                <div class="text-2xl font-black mb-4">\${name}</div>
+                <p class="opacity-50 text-sm max-w-xs">نحن نؤمن بأن الإبداع لا حدود له، وأن التكنولوجيا هي الأداة لتحقيق المستحيل.</p>
+            </div>
+            <div class="text-center md:text-left">
+                <p class="font-bold mb-2">تواصل معنا</p>
+                <p class="opacity-50">info@\${name.replace(/\\s+/g, '').toLowerCase()}.com</p>
+            </div>
+        </div>
+        <div class="mt-20 text-center text-xs opacity-30">
+            \${rights} © 2026 | تم التطوير بواسطة نظام الذكاء الخرافي
+        </div>
     </footer>
+
+</body>
+</html>`;
+
+            document.getElementById('output').value = fullCode;
+            document.getElementById('setup-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.remove('hidden');
+        }
+
+        function copyCode() {
+            const area = document.getElementById("output");
+            area.select();
+            document.execCommand("copy");
+            alert("كفو! تم نسخ الكود الخرافي بالكامل.");
+        }
+    </script>
 </body>
 </html>
